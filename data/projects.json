@@ -1,0 +1,121 @@
+[
+  {
+    "id": "jax-semantic-retrieval",
+    "title": "JAX-Based Neural Network Optimization and Semantic Retrieval Study",
+    "description": "A practical study extending NumPy neural network training into JAX while adding FAISS-based retrieval over structured ML experiment results.",
+    "techStack": [
+      "Python",
+      "JAX",
+      "NumPy",
+      "FAISS"
+    ],
+    "highlights": [
+      "Used jax.numpy, jax.grad, and jax.jit to compare automatic differentiation, vectorized training, JIT compilation, and ML workload optimization.",
+      "Integrated FAISS vector search to experiment with embedding similarity, nearest-neighbor retrieval, and semantic search workflows.",
+      "Benchmarked NumPy, eager JAX, and JIT-compiled JAX training loops using runtime measurements, convergence curves, and throughput-style evaluation."
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/unmeshGbhosale"
+      }
+    ],
+    "category": "AI/ML",
+    "order": 1,
+    "date": "May 2026 - Present",
+    "sourceCode": {
+      "fileName": "jax_training_benchmark.py",
+      "language": "python",
+      "code": "import time\nimport jax\nimport jax.numpy as jnp\n\n\ndef train_step(params, batch, learning_rate):\n    def loss_fn(current_params):\n        inputs, targets = batch\n        logits = forward(current_params, inputs)\n        return binary_cross_entropy(logits, targets)\n\n    loss, gradients = jax.value_and_grad(loss_fn)(params)\n    next_params = jax.tree_util.tree_map(\n        lambda weight, grad: weight - learning_rate * grad,\n        params,\n        gradients,\n    )\n    return next_params, loss\n\n\ncompiled_train_step = jax.jit(train_step)\n\nstart = time.perf_counter()\nfor batch in training_batches:\n    params, loss = compiled_train_step(params, batch, learning_rate=0.01)\n\nelapsed = time.perf_counter() - start\nprint(f\"JIT training loop completed in {elapsed:.3f}s\")"
+    }
+  },
+  {
+    "id": "numpy-training-pipeline",
+    "title": "Neural Network Training Pipeline from Scratch",
+    "description": "A modular neural-network training pipeline built from scratch to deepen ML fundamentals without relying on model libraries.",
+    "techStack": [
+      "Python",
+      "NumPy",
+      "pandas",
+      "matplotlib"
+    ],
+    "highlights": [
+      "Implemented forward propagation, backpropagation, binary cross-entropy loss, gradient updates, and L2 regularization.",
+      "Built preprocessing, stratified 5-fold cross-validation, model training, and evaluation workflows across multiple datasets.",
+      "Evaluated architectures with accuracy, precision, recall, F1-score, learning curves, and convergence plots."
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/unmeshGbhosale"
+      }
+    ],
+    "category": "AI/ML",
+    "order": 2,
+    "date": "Apr 2026 - May 2026",
+    "sourceCode": {
+      "fileName": "numpy_network.py",
+      "language": "python",
+      "code": "import numpy as np\n\n\nclass DenseLayer:\n    def __init__(self, input_size, output_size):\n        self.weights = np.random.randn(input_size, output_size) * 0.01\n        self.bias = np.zeros((1, output_size))\n\n    def forward(self, inputs):\n        self.inputs = inputs\n        return inputs @ self.weights + self.bias\n\n    def backward(self, gradient, learning_rate, l2_lambda=0.0):\n        weight_gradient = self.inputs.T @ gradient\n        bias_gradient = np.sum(gradient, axis=0, keepdims=True)\n        input_gradient = gradient @ self.weights.T\n\n        regularized_gradient = weight_gradient + l2_lambda * self.weights\n        self.weights -= learning_rate * regularized_gradient\n        self.bias -= learning_rate * bias_gradient\n        return input_gradient"
+    }
+  },
+  {
+    "id": "distributed-marketplace-simulation",
+    "title": "Distributed Marketplace System Simulation",
+    "description": "A socket-based distributed systems simulation modeling buyer, seller, trader, and warehouse services.",
+    "techStack": [
+      "Python",
+      "Sockets",
+      "Multithreading"
+    ],
+    "highlights": [
+      "Implemented caching, leader election, fault tolerance, and timestamped logging across distributed components.",
+      "Created benchmark scripts comparing cache-enabled and cache-less execution.",
+      "Analyzed performance, scalability, and failure handling patterns relevant to backend systems for large-scale AI infrastructure."
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/unmeshGbhosale"
+      }
+    ],
+    "category": "Backend",
+    "order": 3,
+    "date": "Mar 2026 - Apr 2026",
+    "sourceCode": {
+      "fileName": "marketplace_service.py",
+      "language": "python",
+      "code": "import socket\nimport threading\n\n\nclass MarketplaceService:\n    def __init__(self, host, port, cache):\n        self.host = host\n        self.port = port\n        self.cache = cache\n\n    def handle_client(self, connection):\n        with connection:\n            request = connection.recv(4096).decode(\"utf-8\")\n            cached_response = self.cache.get(request)\n            if cached_response:\n                connection.sendall(cached_response.encode(\"utf-8\"))\n                return\n\n            response = self.route_request(request)\n            self.cache.set(request, response)\n            connection.sendall(response.encode(\"utf-8\"))\n\n    def serve(self):\n        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:\n            server.bind((self.host, self.port))\n            server.listen()\n            while True:\n                connection, _ = server.accept()\n                threading.Thread(target=self.handle_client, args=(connection,), daemon=True).start()"
+    }
+  },
+  {
+    "id": "ai-ecommerce-assistant",
+    "title": "AI-Powered E-Commerce Assistant",
+    "description": "A client-facing assistant for natural-language product discovery, dynamic filtering, and recommendation workflows.",
+    "techStack": [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB"
+    ],
+    "highlights": [
+      "Designed and shipped AI-backed product search workflows for e-commerce clients at AutoAgent.",
+      "Enabled intent parsing, dynamic filtering, and recommendation-oriented product discovery.",
+      "Reduced product search time by 60% through retrieval and query workflow optimization."
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/unmeshGbhosale"
+      }
+    ],
+    "category": "Full-Stack",
+    "order": 4,
+    "date": "2024 - 2026",
+    "sourceCode": {
+      "fileName": "product-search-route.ts",
+      "language": "typescript",
+      "code": "import type { Request, Response } from \"express\";\n\n\ntype ProductQuery = {\n  text: string;\n  filters: Record<string, string[]>;\n  limit: number;\n};\n\nexport async function searchProducts(request: Request, response: Response) {\n  const query: ProductQuery = parseNaturalLanguageQuery(request.body.query);\n\n  const products = await productCollection\n    .find(buildMongoFilters(query.filters))\n    .limit(query.limit)\n    .toArray();\n\n  const rankedProducts = rankByIntent(products, query.text);\n\n  response.json({\n    query,\n    results: rankedProducts,\n    total: rankedProducts.length,\n  });\n}"
+    }
+  }
+]
