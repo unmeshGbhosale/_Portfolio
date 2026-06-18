@@ -24,11 +24,28 @@ The header includes a visible theme toggle. The default theme is the clean profe
 
 ## Resume
 
-The resume download button points to `public/resume.pdf`. Replace that file whenever you update your resume.
+The resume download button points to `public/resume.pdf` through the shared `assetPath()` helper in `lib/assets.ts`. Replace that file whenever you update your resume.
 
 ## Profile Photo
 
-The hero profile image is stored at `public/profile-photo.jpeg`. Replace that file to update the photo without changing component code.
+The hero profile image is stored at `public/profile-photo.jpeg` and is loaded through `assetPath()` so it works locally and on GitHub Pages.
+
+## GitHub Pages Deployment
+
+This project is configured for static GitHub Pages deployment under:
+
+```text
+https://unmeshgbhosale.github.io/_Portfolio/
+```
+
+Local development needs no base path. For GitHub Pages builds, set:
+
+```bash
+GITHUB_PAGES=true
+NEXT_PUBLIC_BASE_PATH=/_Portfolio
+```
+
+The included `.github/workflows/deploy.yml` sets those values automatically. Public assets such as `profile-photo.jpeg`, `resume.pdf`, and contact icons are expected to resolve under `/_Portfolio/...` in the deployed site.
 
 ## Update Portfolio Content
 
@@ -36,6 +53,7 @@ The hero profile image is stored at `public/profile-photo.jpeg`. Replace that fi
 - Active project content and source-code snippets: edit `data/projects.json`.
 - Future project templates: open `components/Projects.tsx` and search for `Future Project Card Template`.
 - Public sections: components live in `components/`.
+- Public asset path handling: edit `lib/assets.ts`.
 
 ## Add A Future Project
 
@@ -58,7 +76,7 @@ Then check:
 
 - Light theme loads by default.
 - Header theme toggle switches to dark/cyberpunk mode and persists after refresh.
-- Mobile header links follow the order: About, Education, Experience, Skills, Projects, Contact.
+- Mobile header links follow the order: About, Education, Certifications, Experience, Skills, Projects, Contact.
 - Hero photo is not stretched on desktop or mobile.
 - Hero has only `View Projects` and `Download Resume` buttons.
 - Project `Source Code` opens a formatted code modal with line numbers, copy button, and horizontal scrolling.
@@ -70,3 +88,5 @@ Then check:
 1. Push this project to GitHub.
 2. Import the repository in Vercel.
 3. Deploy with the default Next.js settings.
+
+No environment variables are required for local development or Vercel unless you intentionally deploy under a subpath.

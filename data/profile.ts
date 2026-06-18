@@ -1,4 +1,5 @@
 import type { Education, Experience, SkillGroup } from "@/lib/types";
+import { assetPath } from "@/lib/assets";
 
 export const profile = {
   name: "Unmesh Bhosale",
@@ -10,7 +11,7 @@ export const profile = {
   phone: "+1 (413) 210-0034",
   linkedin: "https://linkedin.com/in/unmeshb",
   github: "https://github.com/unmeshGbhosale",
-  resume: "/resume.pdf",
+  resume: assetPath("/resume.pdf"),
   summary:
     "I am an AI/ML-focused computer science graduate student with hands-on work across neural network optimization, machine learning fundamentals, vector search, distributed systems, and production web applications. My background as a full-stack developer and co-founder helps me connect model-building work with usable, reliable software that ships."
 };

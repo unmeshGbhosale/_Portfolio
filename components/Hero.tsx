@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { profile } from "@/data/profile";
+import { assetPath } from "@/lib/assets";
 import { MotionDiv } from "@/components/Motion";
 
 export function Hero() {
@@ -25,7 +26,7 @@ export function Hero() {
             aria-hidden="true"
           >
             <div className="relative h-full w-full overflow-hidden rounded-[1.45rem]">
-              <Image src="/profile-photo.jpeg" alt="Portrait of Unmesh Bhosale" fill priority sizes="(max-width: 767px) 86vw" className="object-cover object-center" />
+              <Image src={assetPath("/profile-photo.jpeg")} alt="Portrait of Unmesh Bhosale" fill priority sizes="(max-width: 767px) 86vw" className="object-cover object-center" />
             </div>
           </MotionDiv>
           <p className="mx-auto mt-5 max-w-2xl text-2xl font-medium leading-tight text-graphite md:mx-0 md:text-3xl">{profile.headline}</p>
@@ -52,7 +53,7 @@ export function Hero() {
           aria-hidden="true"
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.45rem]">
-            <Image src="/profile-photo.jpeg" alt="Portrait of Unmesh Bhosale" fill priority sizes="(min-width: 768px) 42vw, 86vw" className="object-cover object-center" />
+            <Image src={assetPath("/profile-photo.jpeg")} alt="Portrait of Unmesh Bhosale" fill priority sizes="(min-width: 768px) 42vw, 86vw" className="object-cover object-center" />
           </div>
         </MotionDiv>
       </div>
